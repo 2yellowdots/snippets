@@ -1,0 +1,21 @@
+{
+  "name": "drupal/entity_rest_extra",
+  "type": "drupal-module",
+  "description": "Provides functionality for REST services.",
+  "keywords": [
+        "rest"
+  ],
+  "homepage": "http://drupal.org/project/entity_rest_extra",
+  "license": "GPL-2.0+",
+  "require": {
+    "phayes/geophp": "^1.0"
+  },
+  "extra": {
+    "installer-paths": {
+        "vendor/{$name}": [
+            "type:drupal-vendor",
+            "phayes/geophp"
+        ],
+    }
+}
+}

@@ -1,0 +1,10 @@
+services:
+  SnippetsQuery:
+    class: Drupal\snippets\SnippetsQuery
+    arguments: []
+  SnippetsTaxonomyTerms:
+    class: Drupal\snippets\SnippetsTaxonomyTerms
+    arguments: []
+  SnippetsPathAlias:
+    class: Drupal\snippets\SnippetsPathAlias
+    arguments: []

@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * @file
+ * Allows users to create and organize related content in an outline.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Queue\QueueFactory;
+use Drupal\Core\Queue\QueueInterface;
+// use Drupal\Core\Form\FormStateInterface;
+// use Drupal\Core\Render\Element;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+// use Drupal\field\FieldConfigInterface;
+// use Drupal\field\FieldStorageConfigInterface;
+use Drupal\node\NodeInterface;
+use Drupal\node\NodeTypeInterface;
+use Drupal\node\Entity\Node;
+// use Drupal\Core\Language\LanguageInterface;
+// use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+// use Drupal\Core\Template\Attribute;
+use Drupal\user\RoleInterface;
+
+use Drupal\Core\Controller\ControllerBase;
+
+use Drupal\snippets\SnippetsBlock;
+use Drupal\snippets\SnippetsTaxonomyTerms;
+
+
+/**
+ * Implements hook_help().
+ */
+function snippets_help($route_name, RouteMatchInterface $route_match) {
+
+  switch ($route_name) {
+    case 'help.page.snippets':
+      $output = '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The Snippets block to show vocabulary terms and the recent content for the respective term.') . '</p>';
+
+      return $output;
+  }
+
+}
+
+/**
+ * Implements the hook_theme
+ *
+ * @param  boolean $existing [description]
+ * @param  string $type     [description]
+ * @param  string $theme    [description]
+ * @param  string $path     [description]
+ *
+ * @return array()           Theme options
+ */
+function snippets_theme($existing, $type, $theme, $path) {
+
+  return array(
+    'snippets_panel' => array(
+        'variables' => array('vocab' => array()),
+    ),
+    'snippets_panels' => array(
+        'variables' => array('content' => NULL),
+    )
+  );
+
+}
+

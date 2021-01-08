@@ -1,0 +1,13 @@
+name: Snippets
+description: Create home page list of recent vocabulary terms and showing their respective articles
+type: module
+package: custom
+version: 1.0
+core: 8.x
+
+dependencies:
+  - drupal:block
+  - drupal:node
+  - drupal:path
+
+configure: snippets.settings

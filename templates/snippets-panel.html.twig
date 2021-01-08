@@ -1,0 +1,60 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a marker for new or updated content.
+ *
+ * Available variables:
+ * - vocab - a multi-dimensional array
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set max_display = 5 %}
+{% set readon = "" %}
+{% for key, value in vocab %}
+  {% set paddinglr = 'pr' %}
+  {% if loop.index is divisibleby(2) %}
+    {% set paddinglr = 'pl' %}
+  {% endif %}
+  <div class="tw-pb-4 tw-{{ paddinglr }}-2">
+
+  <div class="tw-pb-6 md:tw-text-right tw-rounded-3xl tw-border-2 tw-border-gray-300">
+      {% set break = false %}
+      {% for key1, value1 in value if not break %}
+          {% if loop.index > max_display %}
+            {% set break = true %}
+          {% endif %}
+          {% set zebra = '100' %}
+          {% set readon = value1.readon %}
+          {% if loop.index is divisibleby(2) %}
+            {% set zebra = '200' %}
+          {% endif %}
+          {% if loop.index == 1 %}
+              {% set articletxt = "article" %}
+              {% if value|length > 1 %}
+                {% set articletxt = articletxt~"s" %}
+              {% endif %}
+              <h2 class="tw-text-4xl tw-mt-12 tw-mb-4 tw-pr-6 tw-text-right">{{ value1.term }}</h2>
+              <h3 class="tw-text-lg tw-mb-2 tw-pr-6 tw-text-right">{{ value|length }} {{ articletxt }}</h3>
+              <div class="tw-grid tw-grid-cols-1">
+          {% endif %}
+
+          <div class="tw-bg-gray-{{ zebra }} tw-text-lg tw-text-right tw-leading-loose tw-pt-4 tw-pb-2 tw-pr-6 tw-tracking-wide tw-text-gray-800">{{ value1.title }}</div>
+          {% if loop.index == 1 %}
+            <div class="tw-bg-gray-{{ zebra }} tw-font-light tw-text-base tw-text-right tw-leading-loose tw-pt-1 tw-pb-3 tw-pr-6 tw-tracking-wide tw-text-gray-600">{{ value1.body }}</div>
+          {% endif %}
+          <div class="tw-bg-gray-{{ zebra }} tw-text-sm tw-font-light tw-pb-4 tw-pr-6 tw-text-gray-500 tw-text-right">{{ value1.date }} <span class="tw-text-gray-300 tw-px-3">|</span> {{ value1.diff }}</div>
+
+      {% endfor %}
+
+      {% if value|length > max_display %}
+        <div class="tw-bg-gray-50 tw-text-sm tw-text-right tw-leading-loose tw-pt-4 tw-pb-3 tw-pr-6 tw-tracking-wide tw-text-gray-500">{{ readon }}</div>
+      {% endif %}
+
+      </div>
+
+    </div>
+
+</div>
+{% endfor %}
